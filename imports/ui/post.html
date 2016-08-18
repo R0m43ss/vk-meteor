@@ -1,0 +1,9 @@
+<template name="post">
+	<li>
+		<pre>{{text}}</pre>
+		{{#if img}}
+			<p><img src={{img}} alt="No image"></p>
+		{{/if}}
+		<p><a href={{url}} target="_blank">Подробнее>></a></p>
+	</li>
+</template>
