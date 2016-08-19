@@ -1,9 +1,15 @@
 <body>
 	<div class="container">
 		<header>
-			<a class="editGroup" href=''><strong>Редактировать</strong></a>
-			<a class="addGroup" href=''><strong>Добавить</strong></a>
+			<input type="button" class="editButton" value="Редактировать">
+			<input type="button" class="addButton" value="Добавить">
 			<br>
+			<form class="edit" id="groupForm">
+				<p><input type="text" class="editGroup" id="gid"/> - ID группы</p>
+				<p><input type="text" class="editGroup" id="count"/> - Количество выводимых сообщений</p>
+				<p><input type="text" class="editGroup" id="upd"/> - Частота обновления (мин)</p>
+				<input type="button" class="saveEditButton" value="Сохранить">
+			</form>
 			<p>
 				<div id="vk_groups"></div>
 				<script type="text/javascript">

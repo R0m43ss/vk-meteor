@@ -41,17 +41,22 @@ header {
   position: relative;
 }
 
-.editGroup {
+.editButton {
  float: left;
 }
 
-.addGroup {
+.addButton {
  float: right;
 }
 
-.vk_groups {
+.edit {
  clear: right;
  clear: left;
+ display: none;
+}
+
+.editGroup {
+ width: 75px;
 }
 
 .prevButton {
