@@ -72,17 +72,19 @@ Template.body.events({
 		}
 	},
 	'click .saveEditButton'(){
+		if(!parseInt(document.getElementById('gid').value,10) || !parseInt(document.getElementById('count').value,10) || !parseInt(document.getElementById('upd').value,10))
+		{
+			throw new Meteor.Error("Wrong data format");
+		}
 		var g_id = Groups.find().fetch()[Template.instance().state.get('Index')]._id;
-		check(parseInt(document.getElementById('gid').value, 32), Number);
-		check(parseInt(document.getElementById('count').value, 32), Number);
-		check(parseInt(document.getElementById('upd').value, 32), Number);
-		var gid = document.getElementById('gid').value;
-		var num = document.getElementById('count').value;
-		var updTime = document.getElementById('upd').value;
+		var gid = Math.abs(parseInt(document.getElementById('gid').value,10));
+		var num = Math.abs(parseInt(document.getElementById('count').value,10));
+		var updTime = Math.abs(parseInt(document.getElementById('upd').value,10));
+		if(gid != Groups.findOne(g_id).group || num != Groups.findOne(g_id).postsCount || updTime != Groups.findOne(g_id).updTime)
+			document.getElementById('vk_groups').innerHTML = "";
 		Groups.update(g_id, { $set: { group: gid, postsCount: num, updTime: updTime } });
 		index = Template.instance().state.get('Index');
 		updatePosts();
-		document.getElementById('vk_groups').innerHTML = "";
 		document.getElementById('groupForm').style.display = "none";
 	},
 });
