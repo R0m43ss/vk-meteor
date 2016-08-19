@@ -7,3 +7,9 @@ if(Meteor.isServer){
 		return Groups.find();
 	});
 }
+
+Meteor.methods({
+	'groups.update'(id, gid, count, time){
+		Groups.update(id, { $set: { group: gid, postsCount: count, updTime: time } });
+	},
+});

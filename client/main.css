@@ -2,7 +2,6 @@
 body {
   font-family: sans-serif;
   background-color: #315481;
-  /*background-image: linear-gradient(to bottom, #315481, #918e82 100%);*/
   background-attachment: fixed;
   position: absolute;
   top: 0;
@@ -19,11 +18,11 @@ img {
 }
 
 pre {
- white-space: pre-wrap;       /* css-3 */
- white-space: -moz-pre-wrap !important;  /* Mozilla, since 1999 */
- white-space: -pre-wrap;      /* Opera 4-6 */
- white-space: -o-pre-wrap;    /* Opera 7 */
- word-wrap: break-word;       /* Internet Explorer 5.5+ */
+ white-space: pre-wrap;
+ white-space: -moz-pre-wrap !important; 
+ white-space: -pre-wrap;  
+ white-space: -o-pre-wrap;    
+ word-wrap: break-word;       
  width: 99%;
 }
  
@@ -81,44 +80,4 @@ li {
   list-style: none;
   padding: 15px;
   border-bottom: #315481 solid 1px;
-}
- 
-li .text {
-  margin-left: 10px;
-}
- 
-li.checked {
-  color: #888;
-}
- 
-li.checked .text {
-  text-decoration: line-through;
-}
- 
-li.private {
-  background: #eee;
-  border-color: #ddd;
-}
- 
-header .hide-completed {
-  float: right;
-}
- 
-.toggle-private {
-  margin-left: 5px;
-}
- 
-@media (max-width: 600px) {
-  li {
-    padding: 12px 15px;
-  }
- 
-  .search {
-    width: 150px;
-    clear: both;
-  }
- 
-  .new-task input {
-    padding-bottom: 5px;
-  }
 }
