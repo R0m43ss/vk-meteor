@@ -4,9 +4,7 @@ import './body.html';
 import './feed.js';
 
 Template.body.onCreated(function bodyOnCreated() {
-	Meteor.subscribe('groups', function(){
-		Meteor.call('groups.data');
-	});
+	Meteor.subscribe('groups');
 });
 
 Template.body.events({

@@ -4,20 +4,17 @@ export const Groups = new Mongo.Collection('groups');
 
 if(Meteor.isServer){
 	Meteor.publish('groups', function groupsPublication() {
-		return Groups.find();
-	});
-}
-
-Meteor.methods({
-	// Insert test data
-	'groups.data'(){
 		if(!Groups.findOne({ group: 72495085 }))
 			Groups.insert({ group: 72495085, postsCount: 9, updTime: 4, date: new Date() });
 		if(!Groups.findOne({ group: 105256967 }))
 			Groups.insert({ group: 105256967, postsCount: 4, updTime: 2, date: new Date() });
 		if(!Groups.findOne({ group: 3305 }))
 			Groups.insert({ group: 3305, postsCount: 3, updTime: 4, date: new Date() });
-	},
+		return Groups.find();
+	});
+}
+
+Meteor.methods({
 	'groups.update'(id, gid, count, time){
 		let group = Math.abs(parseInt(gid,10));
 		let postsCount = Math.abs(parseInt(count,10));
