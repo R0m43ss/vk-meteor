@@ -14,7 +14,7 @@ body {
 }
 
 img {
-	max-width: 570px
+  max-width: 500px;
 }
 
 pre {
@@ -36,16 +36,17 @@ pre {
 header {
   background: #d2edf4;
   background-image: linear-gradient(to bottom, #d0edf5, #e1e5f0 100%);
-  padding: 20px 15px 15px 15px;
+  padding: 5px 15px 15px 15px;
   position: relative;
+  border-bottom: #315481 solid 5px;
 }
 
-.editButton {
- float: left;
+.editGroupButton {
+  float: left;
 }
 
-.addButton {
- float: right;
+.deleteGroupButton {
+  float: right;
 }
 
 .edit {
@@ -54,16 +55,12 @@ header {
  display: none;
 }
 
+.addGroup {
+ width: 175px;
+}
+
 .editGroup {
  width: 75px;
-}
-
-.prevButton {
- float: left;
-}
-
-.nextButton {
- float: right;
 }
  
 ul {
@@ -74,10 +71,20 @@ ul {
   background: white;
 }
 
+.posts_list {
+  background: #d2edf4;
+  display: none;
+}
+
+.li_feed {
+  background: #d2edf4;
+  border-bottom: #315481 solid 5px;
+}
  
 li {
   position: relative;
+  background: white;
   list-style: none;
   padding: 15px;
-  border-bottom: #315481 solid 1px;
+  border: #315481 solid 1px;
 }

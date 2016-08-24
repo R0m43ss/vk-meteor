@@ -1,28 +1,20 @@
 <body>
 	<div class="container">
 		<header>
-			<input type="button" class="editButton" value="Редактировать">
-			<!--<input type="button" class="addButton" value="Добавить">-->
+			<h3>Number of feeds: {{groupsCount}}</h3>
+			<input type="button" class="newGroup" value="New feed">
 			<br>
-			<form class="edit" id="groupForm">
-				<p><input type="text" class="editGroup" id="gid"/> - ID группы</p>
-				<p><input type="text" class="editGroup" id="count"/> - Количество выводимых сообщений</p>
-				<p><input type="text" class="editGroup" id="upd"/> - Частота обновления (мин)</p>
-				<input type="button" class="saveEditButton" value="Сохранить">
+			<form class="edit" id="newGroupForm">
+				<p><input type="text" class="addGroup" id="new_gid" placeholder="Community ID"/></p>
+				<span class="text">How to get ID:<br>Open any post of community and check link:<br>vk.com/|domain|*?w=wall-<strong>|community ID|</strong>_|post ID|</span>
+				<p><input type="text" class="addGroup" id="new_count" placeholder="Number of posts"/></p>
+				<p><input type="text" class="addGroup" id="new_upd" placeholder="Update frequency (minutes)"/></p>
+				<input type="button" class="addButton" value="Add">
 			</form>
-			<p>
-				<div id="vk_groups"></div>
-				<script type="text/javascript">
-					{{groupInfo}}
-				</script>
-			</p>
-			<input type="button" class="prevButton" value="<<">
-			<input type="button" class="nextButton" value=">>">
-			<br>
 		</header>
 		<ul>
-			{{#each posts}}
-				{{> post}}
+			{{#each groups}}
+				{{> feed}}
 			{{/each}}
 		</ul>
 	</div>
