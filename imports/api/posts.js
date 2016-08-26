@@ -28,10 +28,14 @@ if(Meteor.isServer) {
 					Posts.insert({ text: str , url: 'http://vk.com/feed?w=wall' + gid*(-1) + '_' + post, img: pic, owner: id,});
 				}
 			}
-			else if(ans.error)
+			else if(ans.error){
 				throw new Meteor.Error(ans.error.error_msg);
+			}
 			else
 				throw new Meteor.Error("Something went wrong:(");
+		},
+		'posts.remove'(id){
+			Posts.remove({owner: id});
 		},
 	});
 }
