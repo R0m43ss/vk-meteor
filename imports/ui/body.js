@@ -4,33 +4,34 @@ import './body.html';
 import './feed.js';
 
 Template.body.onCreated(function bodyOnCreated() {
+	this.state = new ReactiveDict();
+	this.state.set("show", false);
 	Meteor.subscribe('groups');
 });
 
 Template.body.events({
 	'click .newGroup'(){
-		if($("#newGroupForm").css("display") === "none")
-			$("#newGroupForm").css("display", "block");
-		else
-			$("#newGroupForm").css("display", "none");
+		let sh = Template.instance().state.get("show");
+		Template.instance().state.set("show", !sh);
 	},
 	'click .addButton'(){
 		let gid = $("#new_gid").val();
 		let num = $("#new_count").val();
 		let updTime = $("#new_upd").val();
 		Meteor.call('groups.add', gid, num, updTime);
-		$("#newGroupForm").css("display", "none");
-		$("#new_gid").val("");
-		$("#new_count").val("");
-		$("#new_upd").val("");
+		$("#newGroupForm").trigger('reset');
+		Template.instance().state.set("show", false);
 	},
 });
 
 Template.body.helpers({
-	groups() {
+	groups(){
 		return Groups.find({}, { sort: { date: -1 } });
 	},
-	groupsCount() {
+	groupsCount(){
 		return Groups.find().count();
+	},
+	isShow(){
+		return Template.instance().state.get("show");
 	},
 });

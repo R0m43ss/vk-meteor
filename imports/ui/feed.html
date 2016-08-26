@@ -3,25 +3,20 @@
 		<input type="button" class="editGroupButton" value="Settings">
 		<input type="button" class="deleteGroupButton" value="Delete">
 		<br>
+		{{#if show}}
 		<form class="edit" id="groupForm{{_id}}">
 			<p><input type="text" class="editGroup" id="gid{{_id}}" value={{group}} /> - Community ID</p>
 			<p><input type="text" class="editGroup" id="count{{_id}}" value={{postsCount}} /> - Number of posts</p>
 			<p><input type="text" class="editGroup" id="upd{{_id}}" value={{updTime}} /> - Update frequency (minutes)</p>
 			<input type="button" class="saveChanges" value="Save">
 		</form>
+		{{/if}}
 		<br>
-		<div class="vk_groups" id="vk_groups{{_id}}"></div>
-		<script type="text/javascript">
-			{{widget}}
-		</script>
 		<br>
-		<input type="button" class="showPosts" value="Posts ({{count}})">
 		<ul class="posts_list" id="postList{{_id}}">
 			{{#each posts}}
 				{{> post}}
 			{{/each}}
-			<br>
-			<input type="button" class="closeList" value="Close">
 		</ul>
 	</li>
 </template>

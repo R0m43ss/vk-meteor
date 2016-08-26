@@ -14,7 +14,7 @@ body {
 }
 
 img {
-  max-width: 500px;
+  max-width: 100%;
 }
 
 pre {
@@ -27,18 +27,16 @@ pre {
 }
  
 .container {
-  max-width: 600px;
+  max-width: 100%;
   margin: 0 auto;
   min-height: 100%;
-  background: white;
+  background-color: #315481;
 }
  
 header {
-  background: #d2edf4;
-  background-image: linear-gradient(to bottom, #d0edf5, #e1e5f0 100%);
+  background-color: #F5F5F5;
   padding: 5px 15px 15px 15px;
   position: relative;
-  border-bottom: #315481 solid 5px;
 }
 
 .editGroupButton {
@@ -49,10 +47,19 @@ header {
   float: right;
 }
 
-.edit {
+.add {
  clear: right;
  clear: left;
- display: none;
+}
+
+.addGroup{
+  margin-right: 1%;
+  float: left;
+}
+
+.text{
+  clear: right;
+  clear: left;
 }
 
 .addGroup {
@@ -68,17 +75,25 @@ ul {
   clear: left;
   margin: 0;
   padding: 0;
-  background: white;
+  background-color: #315481;;
 }
 
 .posts_list {
-  background: #d2edf4;
-  display: none;
+  background: white;
+  overflow: auto;
+  height: 750px;
+  border: #315481 solid 1px;
 }
 
 .li_feed {
-  background: #d2edf4;
-  border-bottom: #315481 solid 5px;
+  position: inherit;
+  vertical-align: top;
+  width: 30%;
+  margin-top: 5px;
+  margin-left: 1%;
+  margin-bottom: 5px;
+  display: inline-block;
+  background: #00FFFF;
 }
  
 li {
@@ -86,5 +101,6 @@ li {
   background: white;
   list-style: none;
   padding: 15px;
+  margin: auto;
   border: #315481 solid 1px;
 }
