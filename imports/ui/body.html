@@ -3,14 +3,17 @@
 		<header>
 			<h3>Number of feeds: {{groupsCount}}</h3>
 			<input type="button" class="newGroup" value="New feed">
-			<br>
-			<form class="edit" id="newGroupForm">
-				<p><input type="text" class="addGroup" id="new_gid" placeholder="Community ID"/></p>
-				<span class="text">How to get ID:<br>Open any post of community and check link:<br>vk.com/|domain|*?w=wall-<strong>|community ID|</strong>_|post ID|</span>
-				<p><input type="text" class="addGroup" id="new_count" placeholder="Number of posts"/></p>
-				<p><input type="text" class="addGroup" id="new_upd" placeholder="Update frequency (minutes)"/></p>
-				<input type="button" class="addButton" value="Add">
-			</form>
+			{{#if isShow}}
+				<form class="add" id="newGroupForm">
+					<br>
+					<input type="text" class="addGroup" id="new_gid" placeholder="Community ID"/>
+					<input type="text" class="addGroup" id="new_count" placeholder="Number of posts"/>
+					<input type="text" class="addGroup" id="new_upd" placeholder="Update frequency (minutes)"/>
+					<input type="button" class="addButton" value="Add">
+					<br>
+					<span class="text">How to get ID:<br>Open any post of community and check link:<br>vk.com/|domain|*?w=wall-<strong>|community ID|</strong>_|post ID|</span>
+				</form>
+			{{/if}}
 		</header>
 		<ul>
 			{{#each groups}}

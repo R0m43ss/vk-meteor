@@ -4,12 +4,6 @@ export const Groups = new Mongo.Collection('groups');
 
 if(Meteor.isServer){
 	Meteor.publish('groups', function groupsPublication() {
-		if(!Groups.findOne({ group: 72495085 }))
-			Groups.insert({ group: 72495085, postsCount: 9, updTime: 4, date: new Date() });
-		if(!Groups.findOne({ group: 105256967 }))
-			Groups.insert({ group: 105256967, postsCount: 4, updTime: 2, date: new Date() });
-		if(!Groups.findOne({ group: 3305 }))
-			Groups.insert({ group: 3305, postsCount: 3, updTime: 4, date: new Date() });
 		return Groups.find();
 	});
 }

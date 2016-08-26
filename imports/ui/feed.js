@@ -5,49 +5,50 @@ import { Posts } from '../api/posts.js';
 import './feed.html';
 import './post.js';
 
-const options = {redesign: 1, mode: 3, width: "auto", height: "auto", color1: 'FFFFFF', color2: '000000', color3: '5E81A8'};	// Options for VK widget
-
 Template.feed.onCreated(function feedOnCreated(){
 	this.state = new ReactiveDict();
-	this.state.set("Interval", null);
+	this.state.set("Timer", null);
+	this.state.set("isReady", true);
+	this.state.set("Show", false);
 	Meteor.subscribe('posts');
 });
 
 Template.feed.onDestroyed(function (){
-	Meteor.clearInterval(Template.instance().state.get("Interval"));
+	clearTimeout(Template.instance().state.get("Timer"));
 });
 
 Template.feed.helpers({
 	posts(){
-		let id = this._id;
-		let gid = this.group;
-		let count = this.postsCount;
-		let time = this.updTime;
-		Meteor.call('posts.get', id, gid, count);
-		let interval_id = Meteor.setInterval(function(){  
-			Meteor.call('posts.get', id, gid, count);
-		}, time*60000);
-		Template.instance().state.set("Interval", interval_id);
+		if(Template.instance().state.get("isReady")){
+			let temp = Template.instance();
+			let _this = this;
+			Meteor.call('posts.get', this._id, this.group, this.postsCount);
+			let timer_id = setTimeout(function upd(){  
+				Meteor.call('posts.get', _this._id, _this.group, _this.postsCount);
+				let timer = setTimeout(upd, _this.updTime*60000);
+				temp.state.set("Timer", timer);
+			}, this.updTime*60000);
+			Template.instance().state.set("Timer", timer_id);
+		}
 		return Posts.find({owner: this._id});
-	},
-	widget() {
-		$("#vk_groups" + this._id).html("");
-		return VK.Widgets.Group("vk_groups" + this._id, options, this.group);
 	},
 	count() {
 		return Posts.find({owner: this._id}).count();
+	},
+	show(){
+		return Template.instance().state.get("Show");
 	},
 });
 
 Template.feed.events({
 	// Open/close form for editing community data
 	'click .editGroupButton'(){
-		if($("#groupForm" + this._id).css("display") === "none")
-			$("#groupForm" + this._id).css("display", "block");
-		else
-			$("#groupForm" + this._id).css("display", "none");
+		let sh = Template.instance().state.get("Show");
+		Template.instance().state.set("Show", !sh);
 	},
+	// Delete feed
 	'click .deleteGroupButton'() {
+		clearTimeout(Template.instance().state.get("Timer"));
 		Meteor.call('groups.remove',this._id);
 	},
 	// Save changes of community data
@@ -55,22 +56,19 @@ Template.feed.events({
 		let gid = $("#gid" + this._id).val();
 		let num = $("#count" + this._id).val();
 		let updTime = $("#upd" + this._id).val();
-		Meteor.call('groups.update', this._id, gid, num, updTime);
-		Meteor.clearInterval(Template.instance().state.get("Interval"));
-		$("#groupForm" + this._id).css("display", "none");
+		let temp = Template.instance();
+		temp.state.set("isReady", false);
+		Meteor.call('groups.update', this._id, gid, num, updTime, function(err, res){
+			if(!err) {
+				clearTimeout(temp.state.get("Timer"));
+				temp.state.set("isReady", true);
+			}
+			else
+				temp.state.set("isReady", true);
+		});
+		Template.instance().state.set("Show", false);
 		$("#gid" + this._id).val(this.group);
 		$("#count" + this._id).val(this.postsCount);
 		$("#upd" + this._id).val(this.updTime);
-	},
-	// Open/close posts list
-	'click .showPosts'(){
-		if($("#postList" + this._id).css("display") === "none")
-			$("#postList" + this._id).css("display", "block");
-		else
-			$("#postList" + this._id).css("display", "none");
-	},
-	//Close posts list
-	'click .closeList'(){
-		$("#postList" + this._id).css("display", "none");
 	},
 });
